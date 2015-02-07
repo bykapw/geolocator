@@ -1,0 +1,42 @@
+<html>
+<head>
+ <title>Geolocation</title>
+</head>
+
+<body>
+<script>
+function displayPosition(position) {
+   alert("LAT: " + position.coords.latitude + ", LON: " + position.coords.longitude);
+}
+function displayError(error) {
+  var errors = {
+     1: 'No permition',
+     2: 'Unknown location',
+     3: 'Timeout'
+   };
+   alert("Error: " + errors[error.code]);
+}
+
+function locate(){
+  if (navigator.geolocation) {
+    var timeoutValue = 10 * 1000 * 1000;
+    navigator.geolocation.getCurrentPosition(
+      displayPosition, 
+      displayError, 
+      { 
+        enableHighAccuracy: true, 
+        timeout: timeoutValue, 
+        maximumAge: 0 
+      }
+  );
+  }else {
+    alert("Geolocation unsupported");
+  }
+}
+</script>
+
+<input type="button" value="Press me!" onclick="locate()">
+
+</body>
+
+</html>
